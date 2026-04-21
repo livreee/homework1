@@ -1,1 +1,284 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>古典音乐人格测试</title>
+  <style>
+    :root {
+      --gold: #d4af37;
+      --gold-soft: #f3df9f;
+      --black: #0b0b0b;
+      --card: #121212;
+      --text: #efefef;
+      --muted: #b6b6b6;
+    }
 
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(circle at top, #1a1a1a 0%, #090909 45%, #000 100%);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      padding: 28px 16px;
+    }
+
+    .wrap {
+      width: min(900px, 100%);
+      background: linear-gradient(155deg, rgba(212,175,55,.08), rgba(255,255,255,.02));
+      border: 1px solid rgba(212,175,55,.28);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 20px 48px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.03);
+    }
+
+    .title {
+      margin: 0;
+      color: var(--gold-soft);
+      letter-spacing: .08em;
+      font-weight: 700;
+      font-size: clamp(26px, 4vw, 38px);
+      text-align: center;
+    }
+
+    .sub {
+      margin: 10px 0 24px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .question-card {
+      background: var(--card);
+      border: 1px solid rgba(212,175,55,.18);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .q-title {
+      margin: 0 0 14px;
+      color: var(--gold-soft);
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .opts {
+      display: grid;
+      gap: 10px;
+    }
+
+    label {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      cursor: pointer;
+      background: #0f0f0f;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      transition: all .2s ease;
+    }
+
+    label:hover {
+      border-color: rgba(212,175,55,.45);
+      background: #151515;
+    }
+
+    input[type="radio"] {
+      margin-top: 4px;
+      accent-color: var(--gold);
+      transform: scale(1.12);
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 22px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: 1px solid rgba(212,175,55,.75);
+      background: linear-gradient(135deg, #2d240d, #1d1709);
+      color: var(--gold-soft);
+      padding: 11px 20px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 15px;
+      letter-spacing: .05em;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(212,175,55,.2);
+    }
+
+    #result {
+      margin-top: 24px;
+      padding: 22px;
+      border-radius: 14px;
+      background: #0f0f0f;
+      border: 1px solid rgba(212,175,55,.35);
+      display: none;
+    }
+
+    .result-title {
+      margin: 0 0 10px;
+      color: var(--gold-soft);
+      font-size: 24px;
+    }
+
+    .result-desc {
+      margin: 0;
+      line-height: 1.8;
+      color: #dfdfdf;
+    }
+
+    .note {
+      margin-top: 10px;
+      color: #a5a5a5;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1 class="title">古典音乐人格测试</h1>
+    <p class="sub">6道题，找出你最契合的古典音乐气质。<br>黑金极简，聆听你灵魂中的时代回响。</p>
+
+    <form id="quiz">
+      <section class="question-card">
+        <h2 class="q-title">1. 周末午后，你更想做什么？</h2>
+        <div class="opts">
+          <label><input type="radio" name="q1" value="romantic">沉浸在浓烈情绪中写日记或创作</label>
+          <label><input type="radio" name="q1" value="classical">按计划阅读、整理，享受秩序感</label>
+          <label><input type="radio" name="q1" value="impression">散步看云，捕捉光影和当下感受</label>
+          <label><input type="radio" name="q1" value="baroque">练习一项技巧，打磨细节与结构</label>
+        </div>
+      </section>
+
+      <section class="question-card">
+        <h2 class="q-title">2. 你偏好的美学关键词是？</h2>
+        <div class="opts">
+          <label><input type="radio" name="q2" value="classical">平衡、克制、清晰</label>
+          <label><input type="radio" name="q2" value="romantic">热烈、宏大、戏剧性</label>
+          <label><input type="radio" name="q2" value="impression">朦胧、流动、色彩感</label>
+          <label><input type="radio" name="q2" value="modern">实验、突破、个性锋芒</label>
+        </div>
+      </section>
+
+      <section class="question-card">
+        <h2 class="q-title">3. 你处理压力时最像？</h2>
+        <div class="opts">
+          <label><input type="radio" name="q3" value="baroque">拆解步骤，一层层解决</label>
+          <label><input type="radio" name="q3" value="romantic">释放情绪，让心先说话</label>
+          <label><input type="radio" name="q3" value="classical">保持理性，找最优方案</label>
+          <label><input type="radio" name="q3" value="impression">转换环境，用灵感重启自己</label>
+        </div>
+      </section>
+
+      <section class="question-card">
+        <h2 class="q-title">4. 你更容易被哪类旋律吸引？</h2>
+        <div class="opts">
+          <label><input type="radio" name="q4" value="classical">主题明确、结构工整的旋律</label>
+          <label><input type="radio" name="q4" value="impression">和声漂浮、像画面一样的音响</label>
+          <label><input type="radio" name="q4" value="romantic">起伏大、情感推力强的旋律</label>
+          <label><input type="radio" name="q4" value="modern">节奏新奇、出其不意的声音</label>
+        </div>
+      </section>
+
+      <section class="question-card">
+        <h2 class="q-title">5. 你在人际中的状态更像？</h2>
+        <div class="opts">
+          <label><input type="radio" name="q5" value="romantic">真诚外放，愿意强烈表达</label>
+          <label><input type="radio" name="q5" value="classical">稳重有边界，讲分寸与礼仪</label>
+          <label><input type="radio" name="q5" value="impression">温柔敏感，擅长感知气氛</label>
+          <label><input type="radio" name="q5" value="baroque">可靠严谨，注重承诺与执行</label>
+        </div>
+      </section>
+
+      <section class="question-card">
+        <h2 class="q-title">6. 对“理想人生”的想象是？</h2>
+        <div class="opts">
+          <label><input type="radio" name="q6" value="classical">有序、稳定、持续精进</label>
+          <label><input type="radio" name="q6" value="romantic">炽热、自由、不留遗憾</label>
+          <label><input type="radio" name="q6" value="impression">诗意、松弛、与自然同频</label>
+          <label><input type="radio" name="q6" value="modern">先锋、独立、不断重塑自我</label>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button type="button" id="submitBtn">查看测试结果</button>
+        <button type="reset" id="resetBtn">重新开始</button>
+      </div>
+    </form>
+
+    <section id="result" aria-live="polite"></section>
+  </main>
+
+  <script>
+    const resultMap = {
+      classical: {
+        title: "古典派 · 理性之美",
+        desc: "你追求秩序、平衡与精准表达。你像海顿或莫扎特的乐章：结构清晰却富有生命力。适合你的聆听关键词是：奏鸣曲、室内乐、清晰主题发展。"
+      },
+      romantic: {
+        title: "浪漫派 · 情感火焰",
+        desc: "你拥有强烈的情感能量与共情力，渴望真诚、深刻、极致的体验。你会被柴可夫斯基、肖邦、拉赫玛尼诺夫这类浓度很高的音乐打动。"
+      },
+      impression: {
+        title: "印象派 · 光影诗人",
+        desc: "你敏感、细腻，擅长感受微妙氛围。你的音乐人格像德彪西与拉威尔：不追求直白宣告，而是用色彩与留白诉说心境。"
+      },
+      baroque: {
+        title: "巴洛克 · 精密匠心",
+        desc: "你重视逻辑、工艺和深度，享受复杂结构中的秩序感。对你来说，巴赫式复调的理性与神圣感会非常有吸引力。"
+      },
+      modern: {
+        title: "现代主义 · 探索者",
+        desc: "你不满足于既有答案，愿意尝试新语言与边界。你会被20世纪与当代音乐中的张力、实验性和个人表达所吸引。"
+      }
+    };
+
+    const submitBtn = document.getElementById("submitBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const resultEl = document.getElementById("result");
+
+    submitBtn.addEventListener("click", () => {
+      const score = { classical: 0, romantic: 0, impression: 0, baroque: 0, modern: 0 };
+      for (let i = 1; i <= 6; i++) {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (!selected) {
+          alert("请先完成全部题目，再查看结果。");
+          return;
+        }
+        score[selected.value]++;
+      }
+
+      const winner = Object.entries(score).sort((a, b) => b[1] - a[1])[0][0];
+      const item = resultMap[winner];
+
+      resultEl.style.display = "block";
+      resultEl.innerHTML = `
+        <h3 class="result-title">${item.title}</h3>
+        <p class="result-desc">${item.desc}</p>
+        <p class="note">提示：这是一份趣味向人格测试，你也可以尝试听其他流派，拓展自己的音乐宇宙。</p>
+      `;
+      resultEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    resetBtn.addEventListener("click", () => {
+      resultEl.style.display = "none";
+      resultEl.innerHTML = "";
+    });
+  </script>
+</body>
+</html>
